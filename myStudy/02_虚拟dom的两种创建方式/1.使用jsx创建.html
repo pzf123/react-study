@@ -1,0 +1,34 @@
+<!--
+ * @Author: pzf
+ * @description: 文件描述
+ * @Date: 2021-09-13 18:01:21
+ * @LastEditors: pzf
+ * @LastEditTime: 2021-09-14 11:16:30
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <title>Hello react</title> 
+    <!-- 引入react核心库 -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom，用于支撑react操作DOM-->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+</head>
+<body>
+    <div id="test"></div> 
+    <script type="text/babel">
+        //  1.创建虚拟dom 
+        // jsx能让创建虚拟dom更简单
+        const VDOM = <h1> 
+            <span>HELLO, REACT !</span>
+         </h1> 
+        // 2. 渲染虚拟dom到页面 , 第一个参数虚拟dom, 第2个传容易
+        ReactDOM.render(VDOM, document.getElementById('test')) 
+    </script>
+    
+</body>
+</html>

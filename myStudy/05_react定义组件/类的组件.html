@@ -1,0 +1,53 @@
+
+<!--
+ * @Author: pzf
+ * @description: 文件描述
+ * @Date: 2021-09-13 18:01:21
+ * @LastEditors: pzf
+ * @LastEditTime: 2021-09-16 16:35:45
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <title>Hello react</title> 
+    <!-- 引入react核心库 -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom，用于支撑react操作DOM-->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+</head>
+<body>
+    <div id="test"></div> 
+    <script type="text/babel">  
+        // 创建类式组件
+        // 要继承React类的方法
+        class MyComponent extends React.Component {
+            //  constructor不必须
+            // render必须要有
+            // render是放在原型对象上，供实例对象使用
+
+            render() {
+                // 组件缔造的实例对象
+                console.log(this)
+                /*
+                    继承的属性
+                    context, props, refs, state
+                */
+                return <h1>这是类的组件</h1>
+            }
+        } 
+        // 渲染组件页面
+        ReactDOM.render(<MyComponent />, document.getElementById('test'))
+        /*
+            执行了ReactDom.render
+                1. React解析组件标签，找到了MyComponent组件
+                2. 发现组件是使用类定义的，随后new出该类的实例，并通过该实例调用到原型上的render方法
+                3. 将render返回的虚拟dom转为真实dom
+        */
+    </script>
+    
+</body>
+</html>

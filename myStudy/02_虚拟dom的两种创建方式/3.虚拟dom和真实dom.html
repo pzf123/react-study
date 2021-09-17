@@ -1,0 +1,55 @@
+<!--
+ * @Author: pzf
+ * @description: 文件描述
+ * @Date: 2021-09-13 18:01:21
+ * @LastEditors: pzf
+ * @LastEditTime: 2021-09-14 11:48:42
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <title>Hello react</title> 
+    <!-- 引入react核心库 -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom，用于支撑react操作DOM-->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+    <style>
+        #test{
+            color: red;
+        }
+        .test {
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="test"></div> 
+    <script type="text/babel">
+        const myID = 'test'
+        const myData = 'hello world'
+        // 模拟一些数据
+        const data = ['11', '22', '33']
+        const data2 = [<li>11</li>, <li>22</li>, <li>33</li>]
+        const obj = {name1 : '111', name1 : '111', name3 : '111'}
+        // 变量采用花括号
+        // 样式类名指定用className, 避开类名重名
+        // 内联元素，用花括号，接受的是对象
+        // 只有一个根标签
+        // 标签必须闭合，写的是jsx标签，会转为html标签,
+        // 标签首字母是小写字母开头会转为html同名元素，没有就报错， 首字母大写开头，react会去渲染对应的组件，没有就报错
+        const VDOM =
+            <div>
+                <ul>
+                    {data2}
+                </ul>  
+                <span>ddd</span>
+            </div>  
+        ReactDOM.render(VDOM, document.getElementById('test')) 
+    </script>
+    
+</body>
+</html>
