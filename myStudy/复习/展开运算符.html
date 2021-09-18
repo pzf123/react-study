@@ -1,0 +1,43 @@
+<!--
+ * @Author: pzf
+ * @description: 文件描述
+ * @Date: 2021-09-18 15:22:21
+ * @LastEditors: pzf
+ * @LastEditTime: 2021-09-18 15:34:36
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let arr1 = [1, 2, 3]
+        let arr2 = [4, 5, 6]
+        let arr3 = [...arr1, ...arr2]
+        function sum (a, b, c) {
+            return a + b +c
+        }
+        function sum2 (...numbers) {
+            // pre为前的和，后面为当前
+            return numbers.reduce((pre, current) => {
+                return pre + current
+            })
+        }
+        console.log(sum(1, 2, 3))
+        console.log(sum2(1, 2, 3, 4))
+        let person = {name: 'tom', age: '18'}
+        // 展开运算符不能展开对象
+        // 展开运算符.html:34 Uncaught TypeError: Found non-callable @@iterator
+        // console.log(...person)
+        // 但是可以复制一个对象
+        console.log({...person})
+        // 复制对象的是时候修改
+        let person3 = {...person, name: 'dfsad few'}
+        console.log(person3)
+    </script>
+</body>
+</html>

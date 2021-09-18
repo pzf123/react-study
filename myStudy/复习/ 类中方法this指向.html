@@ -1,0 +1,56 @@
+
+<!--
+ * @Author: pzf
+ * @description: 文件描述
+ * @Date: 2021-09-13 18:01:21
+ * @LastEditors: pzf
+ * @LastEditTime: 2021-09-18 11:09:55
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <title>Hello react</title> 
+    <!-- 引入react核心库 -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom，用于支撑react操作DOM-->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+</head>
+<body>
+    <div id="test"></div> 
+    <script type="text/babel"> 
+        /*
+            总结
+                1. 类的构造器不是必须写，要对实例进行一些初始化操作，如添加属性时才写
+                2. 如果A类继承b类，且A类写了构造器，A类的super必须要调用的
+                3. 类中定义的方法是放在类的原型对象上，继承可以顺着原型链找
+
+        */
+        // 创建一个Person类
+        class Person {
+            // 接收一些 
+            constructor(name, age) {
+                this.name = name
+                this.age = age
+            } 
+            // 一般方法
+            speak() {
+                // 放在原型链上，供实例使用
+                // 通过Person 实例调用speak时，speak中的this就是Person实例
+                console.log(`我叫${this.name}`)
+            }
+        } 
+        // 创建一个实例对象
+        var p1 = new Person('tom', 18)
+        // 通过实例调用speak
+        p1.speak()  
+        const x = p1.speak
+        // 函数的直接调用，类中所定义方法，在局部都开启了严格模式，this指向undefined
+        x()
+    </script>
+    
+</body>
+</html>

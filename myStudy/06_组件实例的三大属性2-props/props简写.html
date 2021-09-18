@@ -1,0 +1,76 @@
+
+<!--
+ * @Author: pzf
+ * @description: 文件描述
+ * @Date: 2021-09-13 18:01:21
+ * @LastEditors: pzf
+ * @LastEditTime: 2021-09-18 16:03:18
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <title>Hello react</title> 
+    <!-- 引入react核心库 -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom，用于支撑react操作DOM-->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 对组件标签属性进行限制 -->
+	<script type="text/javascript" src="../js/prop-types.js"></script>
+</head>
+<body>
+    <div id="test"></div> 
+    <div id="test2"></div> 
+    <div id="test3"></div> 
+    <script type="text/babel">  
+        // 创建组件 
+        class Person extends React.Component{ 
+            // 对标签属性的限制
+            static propTypes = {
+                name: PropTypes.string.isRequired,
+                sex: PropTypes.number.isRequired,
+                speak: PropTypes.func,
+            }
+            static defaultProps = {
+                name: 18,
+                sex: '不男不女',
+                speak: () => {
+                    console.log('speak')
+                }
+            }
+            // 给类自身加属性
+            render () {
+                const {name, age, sex, speak} = this.props
+                // props是只读的， 单向数据流
+                speak()
+                // 对组件标签属性的限制，默认属性，
+                return (
+                    <ul>
+                        <li>姓名：{ name }</li>
+                        <li>性别：{ sex }</li>
+                        <li>年龄：{ age + 1 }</li>
+                    </ul>
+                )
+            } 
+        } 
+        // 组件外部给里面带进去 
+        // 传进去的是字符串
+        ReactDOM.render(<Person name="limin" age="18" />, document.getElementById('test'))
+        // 通过{}
+        ReactDOM.render(<Person age="19" />, document.getElementById('test'))
+        const p = {name: 'Amy', age: 15, sex: '女'}
+        // 批量传
+        ReactDOM.render(<Person name={p.name} age={p.age} sex={p.sex} speak={speak}/>, document.getElementById('test2'))
+        // 语法糖写法，展开运算符， 批量传递标签属性
+        // {...p}跟原生的复制对象不一样
+        ReactDOM.render(<Person name="sally" {...p} />, document.getElementById('test3')) 
+        function speak () {
+            console.log('传进去的speak')
+        }
+    </script>
+    
+</body>
+</html>
