@@ -1,0 +1,48 @@
+
+<!--
+ * @Author: pzf
+ * @description: 文件描述
+ * @Date: 2021-09-13 18:01:21
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-10-05 17:21:26
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <title>Hello react</title> 
+    <!-- 引入react核心库 -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom，用于支撑react操作DOM-->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 对组件标签属性进行限制 -->
+	<script type="text/javascript" src="../js/prop-types.js"></script>
+</head>
+<body>
+    <div id="test"></div>  
+    <script type="text/babel">  
+        // 创建组件 
+        // 非受控组件，现用现取
+        class Demo extends React.Component{  
+            handleSubmit = (event) => {
+                event.preventDefault()
+                alert(`用户名${this.username.value}，密码${this.password.value}`)
+            }
+            render () {  
+                return ( 
+                    <form onSubmit={this.handleSubmit}>
+                        用户名<input ref={c => this.username = c} type="text" name="username"/>
+                        密码：<input ref={c => this.password = c} type="password" name="password" />
+                        <button>登录</button>
+                    </form>
+                )
+            }
+        } 
+        ReactDOM.render(<Demo />, document.getElementById('test'))
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,53 @@
+
+<!--
+ * @Author: pzf
+ * @description: 文件描述
+ * @Date: 2021-09-13 18:01:21
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-10-05 15:40:06
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <title>Hello react</title> 
+    <!-- 引入react核心库 -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom，用于支撑react操作DOM-->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 对组件标签属性进行限制 -->
+	<script type="text/javascript" src="../js/prop-types.js"></script>
+</head>
+<body>
+    <div id="test"></div>  
+    <script type="text/babel">  
+        // 创建组件 
+        class Demo extends React.Component{ 
+            state = {
+                isHot: true
+            }
+            // 展示左侧输入框的数据
+            showData = () => {
+                // 组件不建议使用document
+                // alert(document.getElementById('input1').value)
+                // react会收集refs, 相当于vue的$refs, 拿到的是真实dom的节点 
+                alert(this.input1.value) 
+            } 
+            render () {  
+                // ref回调已内联函数方式，在更新的时候会调用两次，但是可以忽略，开发直接写内敛的就可
+                return (
+                    <div>   
+                        <input id="input1" ref={ c => this.input1 = c } type="text" placeholder="点击按钮提示数据" />  
+                        <button onClick={this.showData}>点我提示左侧的数据</button> 
+                    </div>
+                )
+            }
+        } 
+        ReactDOM.render(<Demo />, document.getElementById('test'))
+    </script>
+    
+</body>
+</html>

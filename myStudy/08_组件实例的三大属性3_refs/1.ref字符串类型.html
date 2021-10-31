@@ -1,0 +1,56 @@
+
+<!--
+ * @Author: pzf
+ * @description: 文件描述
+ * @Date: 2021-09-13 18:01:21
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-10-05 15:07:39
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <title>Hello react</title> 
+    <!-- 引入react核心库 -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom，用于支撑react操作DOM-->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 对组件标签属性进行限制 -->
+	<script type="text/javascript" src="../js/prop-types.js"></script>
+</head>
+<body>
+    <div id="test"></div>  
+    <script type="text/babel">  
+        // 创建组件 
+        class Demo extends React.Component{ 
+            // 展示左侧输入框的数据
+            showData = () => {
+                // 组件不建议使用document
+                // alert(document.getElementById('input1').value)
+                // react会收集refs, 相当于vue的$refs, 拿到的是真实dom的节点
+                alert(this.refs.input1.value) 
+            }
+            showData2 = () => {
+                // 组件不建议使用document
+                // alert(document.getElementById('input1').value)
+                // react会收集refs, 相当于vue的$refs, 拿到的是真实dom的节点
+                alert(this.refs.input2.value) 
+            }
+            render () {  
+                return (
+                    <div>
+                        <input id="input1" ref="input1" type="text" placeholder="点击按钮提示数据" />
+                        <button onClick={this.showData}>点我提示左侧的数据</button>
+                        <input onBlur={this.showData2} ref="input2" type="text" placeholder="失去焦点提示数据" />
+                    </div>
+                )
+            }
+        } 
+        ReactDOM.render(<Demo />, document.getElementById('test'))
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,89 @@
+
+<!--
+ * @Author: pzf
+ * @description: 文件描述
+ * @Date: 2021-09-13 18:01:21
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-10-08 22:53:20
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <title>Hello react</title> 
+    <!-- 引入react核心库 -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom，用于支撑react操作DOM-->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 对组件标签属性进行限制 -->
+	<script type="text/javascript" src="../js/prop-types.js"></script>
+</head>
+<body>
+    <div id="test"></div>  
+    <script type="text/babel">  
+        // 创建组件  
+        class Demo extends React.Component{   
+            state = {
+                opacity: 1
+            }
+            death = () => {
+                // 卸载
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+            action = () => {
+                this.timer = setInterval(() => {
+                    let opacity = this.state.opacity - 0.1 
+                    if (opacity <= 0) {
+                        this.setState({
+                            opacity: 1
+                        })
+                    } else {
+                        this.setState({
+                            opacity
+                        })
+                    }
+                }, 200)
+            } 
+            // 初始化, 组件挂载完毕
+            componentDidMount () {
+                this.action()
+            }
+            // 组件卸载后不能更新状态
+            // 组件卸载前工作
+            componentWillUnmount () {
+                // 清除定时器
+                clearInterval(this.timer)
+            }
+            // 初始化渲染，状态更新
+            render () {
+                // 只要改状态就触发, 这里改状态会无线叠加定时器，所以定时器并不能放在这里
+                // setInterval(() => {
+                //     this.setState({
+                //         opacity: this.state.opacity - 0.1
+                //     })
+                //     if (this.state.opacity <= 0) {
+                //         clearInterval(timer)
+                //         this.setState({
+                //             opacity: 1
+                //         })
+                //     }
+                // }, 200)
+                return ( 
+                    <div style={ { opacity: this.state.opacity } }>
+                        <h1>React学不会</h1>
+                        <button onClick={this.death}>不活了</button>
+                        <button onClick={this.action}>开始动</button>
+                    </div>
+                 )
+            } 
+            
+        }
+        // 渲染 
+        ReactDOM.render(<Demo />, document.getElementById('test'))
+    </script>
+    
+</body>
+</html>

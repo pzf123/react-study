@@ -1,0 +1,149 @@
+<!--
+ * @Author: pzf
+ * @description: 文件描述
+ * @Date: 2021-09-13 18:01:21
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-10-31 15:27:24
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hello react</title>
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+    <!-- 引入react-dom，用于支撑react操作DOM-->
+    <script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+    <!-- 对组件标签属性进行限制 -->
+    <script type="text/javascript" src="../js/17.0.1/prop-types.js"></script>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script type="text/babel">
+        // 创建组件  
+        class Count extends React.Component {
+            // 构造器
+            constructor(props) {
+                super(props)
+                // 初始化状态
+                this.state = { count: 0 }
+            }
+            add = () => {
+                const { count } = this.state
+                this.setState({
+                    count: count + 1
+                })
+            }
+            // 卸载组件按钮的回调
+            deatch = () => {
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+            // 不更改任何状态的数据更新
+            force = () => {
+                this.forceUpdate()
+            }
+            render() {
+                console.log('render')
+                const { count } = this.state
+                return (
+                    <div>
+                        <h2>当前求和:{count}</h2>
+                        <button onClick={this.add}>点我+1</button>
+                        <button onClick={this.deatch}>卸载组件</button>
+                        <button onClick={this.force}>不更改任何状态的数据刷新</button>
+                    </div>
+                )
+            }
+            // 组件将要挂载
+            UNSAFE_componentWillMount() {
+                console.log('componentWillMount')
+            }
+            // 组件挂载完
+            componentDidMount() {
+                console.log('componentDidMount')
+            }
+            // 组件将要卸载的钩子
+            componentWillUnmount() {
+                console.log('componentWillUnmount')
+            }
+            // 组件是否需要更新
+            // 如果没有写，React会默认返回TRUE，如果写了需要返回值，true或false，控制组件更新的阀门
+            shouldComponentUpdate() {
+                console.log('shouldComponentUpdate')
+                return true
+            }
+            // 组件将要更新
+            UNSAFE_componentWillUpdate() {
+                console.log('componentWillUpdate')
+            }
+            // 组件更新完毕
+            componentDidUpdate() {
+                console.log('componentDidUpdate')
+            }
+
+        }
+
+        class A extends React.Component {
+            state = {
+                carName: '奔驰'
+            }
+            changeCar = () => {
+                this.setState({ carName: '奥拓' })
+            }
+            render() {
+                return (
+                    <div>
+                        A
+                        <button onClick={this.changeCar}>点击换车</button>
+                        <B carName={this.state.carName} />
+                    </div>
+                )
+            }
+        }
+        class B extends React.Component {
+            constructor(props) {
+                super(props)
+            }
+            render() {
+                const { carName } = this.props
+                return (
+                    <div>B接收到的A{carName}</div>
+                )
+            }
+            // 接收父组件参数钩子，第一次获取不会触发
+            UNSAFE_componentWillReceiveProps() {
+                console.log('componentWillReceiveProps')
+            }
+            // 组件是否需要更新
+            // 如果没有写，React会默认返回TRUE，如果写了需要返回值，true或false，控制组件更新的阀门
+            shouldComponentUpdate() {
+                console.log('shouldComponentUpdate')
+                return true
+            }
+            // 组件将要更新
+            UNSAFE_componentWillUpdate() {
+                console.log('componentWillUpdate')
+            }
+            // 组件更新完毕
+            componentDidUpdate() {
+                console.log('componentDidUpdate')
+            }
+            static getDerivedStateFromProp(props, state) {
+                // 从props得到一个派生的状态
+                // 会把setState拦截
+                // 若state的值在任何时候都取决于props, 那么可以使用
+                return null
+            }
+        }
+        // 渲染 
+        ReactDOM.render(<A />, document.getElementById('test'))
+    </script>
+
+</body>
+
+</html>

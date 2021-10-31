@@ -3,8 +3,8 @@
  * @Author: pzf
  * @description: 文件描述
  * @Date: 2021-09-13 18:01:21
- * @LastEditors: pzf
- * @LastEditTime: 2021-09-18 16:52:24
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-09-23 21:57:00
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +28,11 @@
     <script type="text/babel">  
         // 创建组件 
         class Person extends React.Component{ 
+            constructor(props) {
+                // 构造器是否接收props，是否传递给super, 取决于是否希望在构造器中通过this访问props
+                super(props)
+                // 如果构造器中想要是props需要接收
+            }
             // 对标签属性的限制
             static propTypes = {
                 name: PropTypes.string.isRequired,

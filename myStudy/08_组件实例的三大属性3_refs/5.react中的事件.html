@@ -1,0 +1,57 @@
+
+<!--
+ * @Author: pzf
+ * @description: 文件描述
+ * @Date: 2021-09-13 18:01:21
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-10-05 15:44:51
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <title>Hello react</title> 
+    <!-- 引入react核心库 -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom，用于支撑react操作DOM-->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 对组件标签属性进行限制 -->
+	<script type="text/javascript" src="../js/prop-types.js"></script>
+</head>
+<body>
+    <div id="test"></div>  
+    <script type="text/babel">  
+        // 创建组件 
+        class Demo extends React.Component{ 
+            state = {
+                isHot: true
+            } 
+            myRef = React.createRef()
+            // 展示左侧输入框的数据
+            showData = () => { 
+                alert(this.myRef.current.value) 
+            } 
+            /*
+                通过onXxx属性指定事件处理函数（注意大小写）
+                React使用的是自定义（合成）事件，而并不是使用原生Dom事件 -- 为了更好的兼容性，通过事件委托实现
+                React中的事件是通过事件委托方式处理的（委托给组件最外层的元素）--为了高效
+                通过event.target得到发生事件的DOM元素对象 -- 发生事件的元素是你想要操作的元素，可以减少使用refs
+            */
+            render () {  
+                // ref回调已内联函数方式，在更新的时候会调用两次，但是可以忽略，开发直接写内敛的就可
+                return (
+                    <div>   
+                        <input id="input1" ref={ this.myRef } type="text" placeholder="点击按钮提示数据" />  
+                        <button onClick={this.showData}>点我提示左侧的数据</button> 
+                    </div>
+                )
+            }
+        } 
+        ReactDOM.render(<Demo />, document.getElementById('test'))
+    </script>
+    
+</body>
+</html>
