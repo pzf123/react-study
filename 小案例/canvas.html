@@ -1,0 +1,95 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-11-01 22:33:04
+ * @LastEditTime: 2021-11-01 23:37:17
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /小案例/canvas.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myCanvas,
+        body {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="300" height="100" style="border:1px solid #000000;">
+    </canvas>
+    <img id="mypic" src="" alt="">
+    <script type="text/javascript">
+
+
+        let bg_w = 88,
+            bg_h = 102,
+            inner_w = 58,
+            inner_h = 58,
+            inner_x = 16,
+            inner_y = 16
+        let str = '某服务对对对公司'
+        let strHeight = str.length * 15 + 10
+        bgUrl = 'https://static.sycdev.com/1635780117951.png'
+        innerUrl = 'https://static.sycdev.com/1635779545207.jpg'
+        let canvas = document.createElement('canvas')
+        let context = canvas.getContext('2d')
+        canvas.width = bg_w + strHeight + 15
+        canvas.height = bg_h
+        context.fillStyle = 'white'
+        context.fillRect(bg_w - 5, 28, strHeight, 32)
+        context.beginPath()
+        context.arc(bg_w + strHeight - 5, 44, 16, 0, 2 * Math.PI)
+        context.fill()
+        context.font = "14px Arial";
+        context.fillStyle = '#303133'
+        context.fillText(str, bg_w + 10, 48)
+
+        let img1 = new Image()
+        img1.src = bgUrl
+        img1.crossOrigin = 'Anonymous';
+        img1.width = bg_w
+        img1.height = bg_h
+        img1.setAttribute('crossOrigin', 'anonymous')
+        let img2 = new Image()
+        let flag = true
+        // 将 img1 加入画布
+        img1.onload = () => {
+            context.drawImage(img1, 0, 0, bg_w, bg_h)
+            img2.src = innerUrl
+            img2.crossOrigin = 'Anonymous';
+            img2.setAttribute('crossOrigin', 'anonymous')
+            img2.width = inner_w
+            img2.height = inner_h
+            if (flag) {
+                flag = false
+            } else {
+                let src = canvas.toDataURL()
+                console.log(src)
+            }
+        }
+        // 将 img2 加入画布
+        img2.onload = () => {
+            context.drawImage(img2, inner_x, inner_y, inner_w, inner_h)
+            context.font = "24px Arial";
+            context.fillStyle = '#1C2C58'
+            context.fillText('A公司', 15, 52)
+            if (flag) {
+                flag = false
+            } else {
+                let src = canvas.toDataURL('image/png')
+                document.getElementById('mypic').src = src
+            }
+        }
+
+    </script>
+</body>
+
+</html>
