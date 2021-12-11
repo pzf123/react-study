@@ -1,0 +1,13 @@
+.app-wrap {
+  width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+}
+.delete-btn {
+  border: 1px solid rgb(177, 7, 7);
+  background-color: rgb(223, 92, 92);
+  color: white;
+  border-radius: 4px;
+}

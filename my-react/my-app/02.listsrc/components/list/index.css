@@ -1,0 +1,8 @@
+.my-list {
+  margin: 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.show-wrap:last-child {
+  border-bottom: none;
+}

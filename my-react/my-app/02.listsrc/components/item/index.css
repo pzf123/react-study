@@ -1,0 +1,11 @@
+.show-wrap {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.show-content {
+  flex: 1;
+}
+.show-content input {
+  margin-right: 10px;
+}

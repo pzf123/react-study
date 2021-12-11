@@ -1,0 +1,12 @@
+.bottom-wrap {
+  display: flex;
+}
+.bottom-left {
+  flex: 1;
+}
+.tip-splice {
+  margin: 0 5px;
+}
+.clear-btn {
+  margin-left: 10px;
+}
